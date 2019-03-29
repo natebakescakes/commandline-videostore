@@ -8,14 +8,14 @@ public class Main {
     private final PrintStream out;
     private final MovieRepository movieRepository;
 
-    public static void main(String[] args) throws IOException {
-        new Main(System.in, System.out).run();
-    }
-
     public Main(InputStream in, PrintStream out) throws IOException {
         this.in = in;
         this.out = out;
         movieRepository = new MovieRepository();
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Main(System.in, System.out).run();
     }
 
     void run() throws IOException {
@@ -38,10 +38,9 @@ public class Main {
             if (input.isEmpty()) {
                 break;
             }
-            final String[] rentalData = input.split(" ");
-            int movieKey = Integer.parseInt(rentalData[0]);
-            final Movie movie = movieRepository.getByKey(movieKey);
-            final Rental rental = new Rental(movie, Integer.parseInt(rentalData[1]));
+
+            RentalFactory rentalFactory = new RentalFactory(movieRepository);
+            final Rental rental = rentalFactory.createRental(input);
 
             frequentRenterPoints += rental.getFrequentRenterPoints();
             // show figures for this rental
