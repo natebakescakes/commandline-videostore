@@ -3,5 +3,6 @@
 ### Maven template
 target/
 
-
+### IntelliJ
+.idea
 
