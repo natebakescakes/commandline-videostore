@@ -20,16 +20,10 @@ public class Main {
 
     void run() throws IOException {
         // read movies from file
-        final InputStream movieStream = Main.class.getResourceAsStream("/movies.cvs");
-        final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(movieStream));
-        final Map<Integer, Movie> movies = new HashMap<>();
-        while (bufferedReader.ready()) {
-            final String line = bufferedReader.readLine();
-            final String[] movieData = line.split(";");
-            Movie movie = new Movie(Integer.parseInt(movieData[0]), movieData[1], movieData[2]);
-            movies.put(movie.getKey(), movie);
+        MovieRepository movieRepository = new MovieRepository("/movies.cvs");
+
+        for (Movie movie : movieRepository.getAll())
             out.print(movie.getKey() + ": " + movie.getName() + "\n");
-        }
 
         final BufferedReader inputStreamReader = new BufferedReader(new InputStreamReader(in));
         out.print("Enter customer name: ");
@@ -46,7 +40,7 @@ public class Main {
                 break;
             }
             final String[] rentalData = input.split(" ");
-            final Movie movie = movies.get(Integer.parseInt(rentalData[0]));
+            final Movie movie = movieRepository.getByKey(Integer.parseInt(rentalData[0]));
             final Rental rental = new Rental(movie, Integer.parseInt(rentalData[1]));
 
             frequentRenterPoints += rental.getFrequentRenterPoints();
