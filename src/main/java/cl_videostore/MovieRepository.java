@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class MovieRepository {
 
-    private Map<Integer, Movie> movies;
+    private final Map<Integer, Movie> movies;
 
     public MovieRepository() throws IOException {
         // read movies from file

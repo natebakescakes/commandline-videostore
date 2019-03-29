@@ -1,7 +1,7 @@
 package cl_videostore;
 
 public class RentalFactory {
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     public RentalFactory(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
