@@ -1,8 +1,8 @@
 package cl_videostore;
 
 public class Rental {
-    private Movie movie;
-    private int daysRented;
+    protected final Movie movie;
+    protected final int daysRented;
 
     public Rental(Movie movie, int daysRented) {
         this.movie = movie;
@@ -10,27 +10,7 @@ public class Rental {
     }
 
     public double getAmount() {
-        double thisAmount = 0;
-
-        //determine amounts for rental
-        switch (movie.getCategory()) {
-            case "REGULAR":
-                thisAmount += 2;
-                if (daysRented > 2) {
-                    thisAmount += (daysRented - 2) * 1.5;
-                }
-                break;
-            case "NEW_RELEASE":
-                thisAmount += daysRented * 3;
-                break;
-            case "CHILDRENS":
-                thisAmount += 1.5;
-                if (daysRented > 3) {
-                    thisAmount += (daysRented - 3) * 1.5;
-                }
-                break;
-        }
-        return thisAmount;
+        return 0;
     }
 
     public int getFrequentRenterPoints() {

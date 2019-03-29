@@ -19,7 +19,6 @@ public class Main {
     }
 
     void run() throws IOException {
-
         console.printMovies(movieRepository.getAllMovies());
 
         String customerName = console.inputCustomerName();
