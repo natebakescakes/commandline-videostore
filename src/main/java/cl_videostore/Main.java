@@ -46,36 +46,15 @@ public class Main {
                 break;
             }
             final String[] rental = input.split(" ");
-            final Movie movie2 = movies.get(Integer.parseInt(rental[0]));
-            double thisAmount = 0;
-
+            final Movie movie = movies.get(Integer.parseInt(rental[0]));
             int daysRented = Integer.parseInt(rental[1]);
-            //determine amounts for rental
-            switch (movie2.getCategory()) {
-                case "REGULAR":
-                    thisAmount += 2;
-                    if (daysRented > 2)
-                        thisAmount += (daysRented - 2) * 1.5;
-                    break;
-                case "NEW_RELEASE":
-                    thisAmount += daysRented * 3;
-                    break;
-                case "CHILDRENS":
-                    thisAmount += 1.5;
-                    if (daysRented > 3)
-                        thisAmount += (daysRented - 3) * 1.5;
-                    break;
-            }
 
-            // add frequent renter points
-            frequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if (movie2.getCategory().equals("NEW_RELEASE") && daysRented > 1) {
-                frequentRenterPoints++;
-            }
+            Rental rental2 = new Rental(movie, daysRented);
+            frequentRenterPoints = rental2.getFrequentRenterPoints(frequentRenterPoints);
+
             // show figures for this rental
-            result += "\t" + movie2.getName() + "\t" + thisAmount + "\n";
-            totalAmount += thisAmount;
+            result += "\t" + rental2.getMovieName() + "\t" + rental2.getAmount() + "\n";
+            totalAmount += rental2.getAmount();
         }
 
         // add footer lines
@@ -84,4 +63,5 @@ public class Main {
 
         out.print(result);
     }
+
 }
